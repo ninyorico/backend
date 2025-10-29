@@ -1,6 +1,9 @@
 import express from "express";
+import 'dotenv/config.js';
+import bookRoutes from "./routers/BookRoutes.js";
+import studentRoutes  from "./routers/StudentRoutes.js";
 
-
+//init app
 const app = express();
 
 const port = 4000;
@@ -9,13 +12,12 @@ const port = 4000;
 app.use(express.json());
 
 try {
-    app.listen(port, () => {
-        console.log(`listening to port  https://localhost:${port}`);
+    app.listen(process.env.PORT || 3000, () => {
+        console.log(`listening to port:${process.env.PORT || 3000}...`);
     });
 } catch(e) {
     console.log(e);
 }
 
-app.get('/sa', async (request, response) =>{
-    response.status(200).json({message: "Niño Rico Bancoro"});
-})
+app.use('/book',bookRoutes);
+app.use('/student',studentRoutes);

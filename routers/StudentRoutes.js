@@ -3,7 +3,10 @@ import express from "express";
 
 const studentRoutes = express.Router();
 
+
 studentRoutes.get('/all', StudentController.fetchStudents);
-//bookRoutes.post('/new', BookController.createBook)
+studentRoutes.post('/new', StudentController.createStudent)
+studentRoutes.put('/edit/:StudentId', StudentController.editStudent);
+studentRoutes.delete('/delete/:StudentId', StudentController.deleteStudent)
 
 export default studentRoutes;

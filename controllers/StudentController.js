@@ -2,8 +2,8 @@ import * as StudentModel from  "../models/StudentModel.js";
 
 export const fetchStudents = async (req, res) =>{
     try{
-        const books = await StudentModel.getStudent();
-        res.status(200).json({success: true, message: books});
+        const students = await StudentModel.getStudent();
+        res.status(200).json({success: true, message: students});
     }catch(e){
         console.log(e);
         res.status(500).json({
@@ -17,8 +17,8 @@ export const fetchStudents = async (req, res) =>{
 export const createStudent = async (req, res) => {
     const {srcode, name, course} = req.body
     try{
-        const studentId = await StudentModel.insertStudent(title, genre, status);
-        res.status(200).json({success:true, message : StudentId})
+        const studentId = await StudentModel.insertStudent(srcode, name, course);
+        res.status(200).json({success:true, message : studentId})
 
     }catch(e){
         console.log(e)
@@ -30,8 +30,8 @@ export const editStudent = async (req, res) => {
     const {srcode, name, course} = req.body
     const {studentId} = req.params;
     try{
-        const updatedStudentId = await StudentModel.updateStudent(srcode, name, course, studentId);
-        res.status(200).json({success:true, message : updatedStudentId})
+        const updatedId = await StudentModel.updateStudent(srcode, name, course, studentId);
+        res.status(200).json({success:true, message : updatedId})
 
     }catch(e){
         console.log(e)
@@ -40,9 +40,9 @@ export const editStudent = async (req, res) => {
 }
 
 export const deleteStudent = async (req, res) => {
-    const {bookId} = req.params;
+    const {studentId} = req.params;
     try{
-        const deleteId = await BookModel.deleteStudent(bookId);
+        const deleteId = await StudentModel.deleteStudent(studentId);
         res.status(200).json({success:true, message : deleteId})
 
     }catch(e){

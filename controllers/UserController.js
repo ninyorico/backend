@@ -9,7 +9,20 @@ export const register = async (req, res) => {
         res.status(201).json({success: true, message: user});
     }catch(err){
         console.log(err);   
-        res.status(400).json({success: true, message: user})
+        res.status(400).json({success: true, message: err})
+    }
+
+}   
+
+export const login = async (req, res) => {
+    const {email, password} = req.body;
+    try{
+        const token = await UserModel.login(email, password);
+        res.status(201).json({success: true,
+            message: [{result: "login successful!"}, token]});
+    }catch(err){
+        console.log(err);   
+        res.status(400).json({success: true, message: err})
     }
 
 }
